@@ -7,15 +7,14 @@ export function drawFrame(
     letters: string[], 
     guesses: Set<string>,
     incorrect: Set<string>,
-    ) {
- console.clear();
+    ): void {
+console.clear();
 console.log(stages[stage]);
 
 const display = letters.map((l) => (guesses.has(l) ? l : "_")).join(" ");
-console.log(chalk.greenBright(`Guess: ${display}`));
 
-const incorrectDisplay = [...incorrect].sort().join(" ");
-console.log(chalk.red(`Incorrect: ${incorrectDisplay}`));
+console.log(chalk.greenBright(`Guess: ${display}`));
+console.log(chalk.red(`Incorrect: ${[...incorrect].sort().join(" ")}`));
 
 if (stage === stages.length - 1) {
     console.log(chalk.red(`You lose! The word was ${word}`));
