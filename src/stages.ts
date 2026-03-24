@@ -1,4 +1,4 @@
-export const stages: string[] = [
+export const stages = [
 `
   +---+
   |   |
@@ -62,5 +62,4 @@ export const stages: string[] = [
       |
 =========
 `,
-"You FAILED"
 ];
