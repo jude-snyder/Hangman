@@ -1,17 +1,8 @@
 import { drawFrame } from "./src/draw-frame";
+import { getWord } from "./src/get-word.ts";
 import { handleKey } from "./src/handle-key";
 
-const file = Bun.file("words.txt");
-const text = await file.text();
-
-const words = text
-.split(",")
-.map((w) => w.trim())
-.filter(Boolean);
-
-const index = Math.floor(Math.random() * words.length);
-const word = words[index]!;
-
+const word = await getWord();
 const letters = [...word];
 
 const guesses = new Set<string>();
@@ -21,6 +12,8 @@ let stage = 0;
 
 process.stdin.setRawMode(true);
 process.stdin.resume();
-process.stdin.on("data", handleKey);
+process.stdin.on("data", (buffer) => {
+    stage = handleKey(buffer, stage, word, letters, guesses, incorrect);
+});
 
 drawFrame(stage, word, letters, guesses, incorrect);
