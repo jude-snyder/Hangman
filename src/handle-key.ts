@@ -1,22 +1,23 @@
 import chalk from "chalk";
-import { isLiteralTypeLiteral } from "typescript";
 import { drawFrame } from "./draw-frame";
 
 export function handleKey(
     buffer: Buffer, 
     stage: number, 
-    letters: string[],
     word: string,
+    letters: Array<string>,
     guesses: Set<string>, 
     incorrect: Set<string>
 ): number {
+    const ch = buffer.toString().toUpperCase();
+    
+    
     if (buffer[0] === 3) {
         console.clear();
         console.log(chalk.red("Game exit"));
         process.exit(0);
     }
 
-    const ch = buffer.toString().toUpperCase();
 
     if(/^[A-Z]$/.test(ch)) {
         if (!guesses.has(ch) && !incorrect.has(ch)) {
@@ -30,5 +31,6 @@ export function handleKey(
 
         drawFrame(stage, word, letters, guesses, incorrect);
     }
-    return stage;
+   
+ return stage;
 }
