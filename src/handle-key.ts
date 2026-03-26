@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { drawFrame } from "./draw-frame";
 
 export function handleKey(
-    buffer: Buffer, 
+    buffer: string | NonSharedBuffer, 
     stage: number, 
     word: string,
     letters: Array<string>,
